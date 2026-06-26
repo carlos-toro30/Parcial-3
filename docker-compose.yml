@@ -1,0 +1,116 @@
+services:
+  eureka-server:
+    build: ./eureka-server
+    container_name: eureka-server
+    ports:
+         - "8761:8761"
+
+  microservicioauth:
+    build: ./microservicioauth
+    container_name: microservicioauth
+    ports:
+         - "9091:9091"
+    environment:
+         SPRING_PROFILES_ACTIVE: docker
+    depends_on:
+         - eureka-server
+
+  microserviciocliente:
+    build: ./microserviciocliente
+    container_name: microserviciocliente
+    ports:
+         - "9092:9092"
+    environment:
+         SPRING_PROFILES_ACTIVE: docker
+    depends_on:
+         - eureka-server
+
+  microservicioventa:
+    build: ./microservicioventa
+    container_name: microservicioventa
+    ports:
+         - "9093:9093"
+    environment:
+         SPRING_PROFILES_ACTIVE: docker
+    depends_on:
+         - eureka-server
+
+  microserviciosucursal:
+    build: ./microserviciosucursal
+    container_name: microserviciosucursal
+    ports:
+         - "9094:9094"
+    environment:
+         SPRING_PROFILES_ACTIVE: docker
+    depends_on:
+         - eureka-server   
+  
+  microserviciovehiculo:
+    build: ./microserviciovehiculo
+    container_name: microserviciovehiculo
+    ports:
+         - "9095:9095"
+    environment:
+         SPRING_PROFILES_ACTIVE: docker
+    depends_on:
+         - eureka-server
+
+  microservicioempleado:
+    build: ./microservicioempleado
+    container_name: microservicioempleado
+    ports:
+         - "9096:9096"
+    environment:
+         SPRING_PROFILES_ACTIVE: docker
+    depends_on:
+         - eureka-server
+
+  microserviciopago:
+    build: ./microserviciopago
+    container_name: microserviciopago
+    ports:
+         - "9097:9097"
+    environment:
+         SPRING_PROFILES_ACTIVE: docker
+    depends_on:
+         - eureka-server
+
+  microservicioreporte:
+    build: ./microservicioreporte
+    container_name: microservicioreporte
+    ports:
+         - "9098:9098"
+    environment:
+         SPRING_PROFILES_ACTIVE: docker
+    depends_on:
+         - eureka-server
+
+  microservicionotificacion:
+    build: ./microservicionotificacion
+    container_name: microservicionotificacion
+    ports:
+         - "9099:9099"
+    environment:
+         SPRING_PROFILES_ACTIVE: docker
+    depends_on:
+         - eureka-server
+
+
+  gatewayfinal:
+    build: ./gatewayfinal
+    container_name: gatewayfinal
+    ports:
+      - "9090:9090"
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+    depends_on:
+         - eureka-server
+         - microservicioauth
+         - microserviciocliente
+         - microservicioventa
+         - microserviciosucursal
+         - microserviciovehiculo
+         - microservicioempleado
+         - microserviciopago
+         - microservicioreporte
+         - microservicionotificacion
